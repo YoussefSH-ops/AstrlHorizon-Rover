@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      # Address of the FastAPI server as seen from this container (no trailing slash).
+      BACKEND_URL: ${BACKEND_URL:-http://backend:8000}
+    restart: unless-stopped
+
+  # Uncomment to run the FastAPI backend from a sibling folder in the same stack:
+  # backend:
+  #   build: ../astral-horizon-backend
+  #   expose:
+  #     - "8000"
+  #   restart: unless-stopped
